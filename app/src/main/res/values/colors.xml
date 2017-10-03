@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorRepoName">#0366d6</color>
     <color name="colorRepoDescription">#586069</color>
+    <color name="colorRepoText">#586069</color>
+    <color name="background_search_color">#fafbfc</color>
+    <color name="background_color">#000</color>
 </resources>

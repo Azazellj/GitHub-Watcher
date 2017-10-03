@@ -8,143 +8,171 @@ import com.google.gson.annotations.SerializedName;
 
 public class Repository {
     @SerializedName("id")
-    public int id;
+    private int id;
     @SerializedName("name")
-    public String name;
+    private String name;
     @SerializedName("full_name")
-    public String fullName;
+    private String fullName;
     @SerializedName("owner")
-    public Owner owner;
+    private Owner owner;
     @SerializedName("private")
-    public boolean _private;
+    private boolean _private;
     @SerializedName("html_url")
-    public String htmlUrl;
+    private String htmlUrl;
     @SerializedName("description")
-    public String description;
+    private String description;
     @SerializedName("fork")
-    public boolean fork;
+    private boolean fork;
     @SerializedName("url")
-    public String url;
+    private String url;
     @SerializedName("forks_url")
-    public String forksUrl;
+    private String forksUrl;
     @SerializedName("keys_url")
-    public String keysUrl;
+    private String keysUrl;
     @SerializedName("collaborators_url")
-    public String collaboratorsUrl;
+    private String collaboratorsUrl;
     @SerializedName("teams_url")
-    public String teamsUrl;
+    private String teamsUrl;
     @SerializedName("hooks_url")
-    public String hooksUrl;
+    private String hooksUrl;
     @SerializedName("issue_events_url")
-    public String issueEventsUrl;
+    private String issueEventsUrl;
     @SerializedName("events_url")
-    public String eventsUrl;
+    private String eventsUrl;
     @SerializedName("assignees_url")
-    public String assigneesUrl;
+    private String assigneesUrl;
     @SerializedName("branches_url")
-    public String branchesUrl;
+    private String branchesUrl;
     @SerializedName("tags_url")
-    public String tagsUrl;
+    private String tagsUrl;
     @SerializedName("blobs_url")
-    public String blobsUrl;
+    private String blobsUrl;
     @SerializedName("git_tags_url")
-    public String gitTagsUrl;
+    private String gitTagsUrl;
     @SerializedName("git_refs_url")
-    public String gitRefsUrl;
+    private String gitRefsUrl;
     @SerializedName("trees_url")
-    public String treesUrl;
+    private String treesUrl;
     @SerializedName("statuses_url")
-    public String statusesUrl;
+    private String statusesUrl;
     @SerializedName("languages_url")
-    public String languagesUrl;
+    private String languagesUrl;
     @SerializedName("stargazers_url")
-    public String stargazersUrl;
+    private String stargazersUrl;
     @SerializedName("contributors_url")
-    public String contributorsUrl;
+    private String contributorsUrl;
     @SerializedName("subscribers_url")
-    public String subscribersUrl;
+    private String subscribersUrl;
     @SerializedName("subscription_url")
-    public String subscriptionUrl;
+    private String subscriptionUrl;
     @SerializedName("commits_url")
-    public String commitsUrl;
+    private String commitsUrl;
     @SerializedName("git_commits_url")
-    public String gitCommitsUrl;
+    private String gitCommitsUrl;
     @SerializedName("comments_url")
-    public String commentsUrl;
+    private String commentsUrl;
     @SerializedName("issue_comment_url")
-    public String issueCommentUrl;
+    private String issueCommentUrl;
     @SerializedName("contents_url")
-    public String contentsUrl;
+    private String contentsUrl;
     @SerializedName("compare_url")
-    public String compareUrl;
+    private String compareUrl;
     @SerializedName("merges_url")
-    public String mergesUrl;
+    private String mergesUrl;
     @SerializedName("archive_url")
-    public String archiveUrl;
+    private String archiveUrl;
     @SerializedName("downloads_url")
-    public String downloadsUrl;
+    private String downloadsUrl;
     @SerializedName("issues_url")
-    public String issuesUrl;
+    private String issuesUrl;
     @SerializedName("pulls_url")
-    public String pullsUrl;
+    private String pullsUrl;
     @SerializedName("milestones_url")
-    public String milestonesUrl;
+    private String milestonesUrl;
     @SerializedName("notifications_url")
-    public String notificationsUrl;
+    private String notificationsUrl;
     @SerializedName("labels_url")
-    public String labelsUrl;
+    private String labelsUrl;
     @SerializedName("releases_url")
-    public String releasesUrl;
+    private String releasesUrl;
     @SerializedName("deployments_url")
-    public String deploymentsUrl;
+    private String deploymentsUrl;
     @SerializedName("created_at")
-    public String createdAt;
+    private String createdAt;
     @SerializedName("updated_at")
-    public String updatedAt;
+    private String updatedAt;
     @SerializedName("pushed_at")
-    public String pushedAt;
+    private String pushedAt;
     @SerializedName("git_url")
-    public String gitUrl;
+    private String gitUrl;
     @SerializedName("ssh_url")
-    public String sshUrl;
+    private String sshUrl;
     @SerializedName("clone_url")
-    public String cloneUrl;
+    private String cloneUrl;
     @SerializedName("svn_url")
-    public String svnUrl;
+    private String svnUrl;
     @SerializedName("homepage")
-    public String homepage;
+    private String homepage;
     @SerializedName("size")
-    public int size;
+    private int size;
     @SerializedName("stargazers_count")
-    public int stargazersCount;
+    private int stargazersCount;
     @SerializedName("watchers_count")
-    public int watchersCount;
+    private int watchersCount;
     @SerializedName("language")
-    public String language;
+    private String language;
     @SerializedName("has_issues")
-    public boolean hasIssues;
+    private boolean hasIssues;
     @SerializedName("has_projects")
-    public boolean hasProjects;
+    private boolean hasProjects;
     @SerializedName("has_downloads")
-    public boolean hasDownloads;
+    private boolean hasDownloads;
     @SerializedName("has_wiki")
-    public boolean hasWiki;
+    private boolean hasWiki;
     @SerializedName("has_pages")
-    public boolean hasPages;
+    private boolean hasPages;
     @SerializedName("forks_count")
-    public int forksCount;
+    private int forksCount;
     @SerializedName("mirror_url")
-    public Object mirrorUrl;
+    private Object mirrorUrl;
     @SerializedName("open_issues_count")
-    public int openIssuesCount;
+    private int openIssuesCount;
     @SerializedName("forks")
-    public int forks;
+    private int forks;
     @SerializedName("open_issues")
-    public int openIssues;
+    private int openIssues;
     @SerializedName("watchers")
-    public int watchers;
+    private int watchers;
     @SerializedName("default_branch")
-    public String defaultBranch;
+    private String defaultBranch;
     @SerializedName("score")
-    public double score;
+    private double score;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getForksCount() {
+        return forksCount;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public int getStargazersCount() {
+        return stargazersCount;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
 }

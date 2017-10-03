@@ -8,37 +8,41 @@ import com.google.gson.annotations.SerializedName;
 
 public class Owner {
     @SerializedName("login")
-    public String login;
+    private String login;
     @SerializedName("id")
-    public int id;
+    private int id;
     @SerializedName("avatar_url")
-    public String avatarUrl;
+    private String avatarUrl;
     @SerializedName("gravatar_id")
-    public String gravatarId;
+    private String gravatarId;
     @SerializedName("url")
-    public String url;
+    private String url;
     @SerializedName("html_url")
-    public String htmlUrl;
+    private String htmlUrl;
     @SerializedName("followers_url")
-    public String followersUrl;
+    private String followersUrl;
     @SerializedName("following_url")
-    public String followingUrl;
+    private String followingUrl;
     @SerializedName("gists_url")
-    public String gistsUrl;
+    private String gistsUrl;
     @SerializedName("starred_url")
-    public String starredUrl;
+    private String starredUrl;
     @SerializedName("subscriptions_url")
-    public String subscriptionsUrl;
+    private String subscriptionsUrl;
     @SerializedName("organizations_url")
-    public String organizationsUrl;
+    private String organizationsUrl;
     @SerializedName("repos_url")
-    public String reposUrl;
+    private String reposUrl;
     @SerializedName("events_url")
-    public String eventsUrl;
+    private String eventsUrl;
     @SerializedName("received_events_url")
-    public String receivedEventsUrl;
+    private String receivedEventsUrl;
     @SerializedName("type")
-    public String type;
+    private String type;
     @SerializedName("site_admin")
-    public boolean siteAdmin;
+    private boolean siteAdmin;
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
 }

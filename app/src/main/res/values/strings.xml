@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GitHub Watcher</string>
+    <string name="t_date_updated" formatted="false">Updated on %s</string>
+    <string name="t_no_search_results">We couldn’t find any repositories matching.</string>
 </resources>
