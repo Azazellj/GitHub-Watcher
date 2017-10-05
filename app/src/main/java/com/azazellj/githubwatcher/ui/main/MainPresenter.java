@@ -5,6 +5,7 @@ import com.azazellj.githubwatcher.data.model.Repository;
 import com.azazellj.githubwatcher.data.response.RepositoryResponse;
 import com.azazellj.githubwatcher.ui.base.BasePresenter;
 import com.azazellj.githubwatcher.ui.base.ProgressPresenter;
+import com.azazellj.githubwatcher.util.Constants;
 
 import java.util.List;
 
@@ -22,12 +23,8 @@ public class MainPresenter
         extends BasePresenter<MainMvpView>
         implements ProgressPresenter {
 
-    public static final int FIRST_PAGE = 1;
-    public static final boolean NEW_LOAD = true;
-    public static final int MIN_STR_SIZE = 3;
 
-    @Inject
-    ApiRestService apiRestService;
+    private ApiRestService apiRestService;
 
     @Inject
     public MainPresenter(ApiRestService restService) {
@@ -35,7 +32,7 @@ public class MainPresenter
     }
 
     public void findRepo(final String searchStr) {
-        findRepo(searchStr, FIRST_PAGE, true);
+        findRepo(searchStr, Constants.FIRST_PAGE, true);
     }
 
     public void findRepo(final String searchStr, final int page) {
@@ -46,8 +43,7 @@ public class MainPresenter
 
         Observable.just(apiRestService)
                 .subscribeOn(Schedulers.newThread())
-                .map(restService -> restService.findRepositories(searchStr, page))
-                .flatMap(result -> result)
+                .flatMap(restService -> restService.findRepositories(searchStr, page))
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(() -> showProgressOnScreen())
                 .doOnCompleted(() -> hideProgressOnScreen())
@@ -62,10 +58,10 @@ public class MainPresenter
                                   boolean newLoad, int page) {
         List<Repository> items = response.getItems();
         int totalCount = response.getTotalCount();
-        boolean endOfResults = items.isEmpty() && page != FIRST_PAGE;
+        boolean endOfResults = items.isEmpty() && page != Constants.FIRST_PAGE;
         Integer nextPage = endOfResults ? null : ++page;
 
-        getMvpView().showRepositories(items, totalCount, endOfResults, newLoad, nextPage);
+        getMvpView().showRepositories(items, newLoad, nextPage);
     }
 
     private void analyzeGetRepoError(String funcName, Throwable error) {

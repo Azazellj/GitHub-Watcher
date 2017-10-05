@@ -8,4 +8,6 @@
     <color name="colorRepoText">#586069</color>
     <color name="background_search_color">#fafbfc</color>
     <color name="background_color">#000</color>
+    <color name="color_primary_text">#202020</color>
+    <color name="color_secondary_text">#8F8F8F</color>
 </resources>

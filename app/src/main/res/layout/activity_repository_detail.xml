@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="user"
+            type="com.azazellj.githubwatcher.data.model.User" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,24 +27,14 @@
                 android:background="?colorPrimary"
                 android:minHeight="?attr/actionBarSize"
                 app:theme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <android.support.v7.widget.SearchView
-                android:id="@+id/search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:theme="@style/ThemeOverlay.AppCompat.Light">
-
-            </android.support.v7.widget.SearchView>
-
         </android.support.design.widget.AppBarLayout>
 
         <com.malinskiy.superrecyclerview.SuperRecyclerView
-            android:id="@+id/search_recycler_view"
+            android:id="@+id/subscribers_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/app_bar_layout"
             android:background="@color/background_search_color"
-            app:layout_empty="@layout/layout_empty_search"
             app:layout_moreProgress="@layout/view_more_progress_grey"
             app:mainLayoutId="@layout/layout_recyclerview_verticalscroll"
             app:recyclerClipToPadding="false"

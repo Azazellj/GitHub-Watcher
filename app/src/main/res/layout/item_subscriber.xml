@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.azazellj.githubwatcher.data.model.User" />
+    </data>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/owner_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            app:imageUrl="@{user.avatarUrl}" />
+
+        <TextView
+            android:id="@+id/owner_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/space"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:alpha="0.87"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{user.login}"
+            android:textColor="@color/color_primary_text"
+            android:textSize="16sp"
+            tools:text="Name" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/repo_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/space"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:alpha="0.54"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{user.htmlUrl}"
+            android:textColor="@color/color_secondary_text"
+            android:textSize="13sp"
+            tools:text="azazellj/repoName" />
+    </RelativeLayout>
+</layout>

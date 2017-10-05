@@ -1,5 +1,7 @@
 package com.azazellj.githubwatcher.ui.main;
 
+import android.support.annotation.Nullable;
+
 import com.azazellj.githubwatcher.data.model.Repository;
 import com.azazellj.githubwatcher.ui.base.ProgressMvpView;
 
@@ -12,7 +14,5 @@ import java.util.List;
 public interface MainMvpView
         extends ProgressMvpView {
 
-    void showRepositories(List<Repository> items, int totalCount,
-                          boolean endOfResults, boolean newLoad,
-                          Integer nextPage);
+    void showRepositories(List<Repository> items, boolean newLoad, @Nullable Integer nextPage);
 }

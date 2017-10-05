@@ -1,9 +1,11 @@
 package com.azazellj.githubwatcher.data;
 
 import com.azazellj.githubwatcher.BuildConfig;
+import com.azazellj.githubwatcher.data.model.User;
 import com.azazellj.githubwatcher.data.response.RepositoryResponse;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -12,6 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -24,6 +27,9 @@ public interface ApiRestService {
     @GET("search/repositories?per_page=10")
     Observable<RepositoryResponse> findRepositories(@Query("q") String query, @Query("page") int page);
 
+    // TODO: 10/3/17 add `per_page` param to app settings
+    @GET("repos/{full_repo_name}/subscribers?per_page=10")
+    Observable<List<User>> getSubscribers(@Path(value = "full_repo_name", encoded = true) String repoName, @Query("page") int page);
 
     class Creator {
         private static final int TIMEOUT_CONNECTION = 10;

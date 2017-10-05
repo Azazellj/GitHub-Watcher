@@ -2,11 +2,14 @@ package com.azazellj.githubwatcher.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by azazellj on 02.10.17.
  */
 
-public class Owner {
+public class User
+        implements Serializable {
     @SerializedName("login")
     private String login;
     @SerializedName("id")
@@ -44,5 +47,13 @@ public class Owner {
 
     public String getAvatarUrl() {
         return avatarUrl;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }

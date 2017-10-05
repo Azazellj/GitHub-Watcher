@@ -2,6 +2,7 @@ package com.azazellj.githubwatcher.injection.component;
 
 import com.azazellj.githubwatcher.injection.module.AppModule;
 import com.azazellj.githubwatcher.ui.main.MainActivity;
+import com.azazellj.githubwatcher.ui.repository.detail.RepositoryDetailActivity;
 
 import javax.inject.Singleton;
 
@@ -14,4 +15,5 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
     void inject(MainActivity activity);
+    void inject(RepositoryDetailActivity activity);
 }

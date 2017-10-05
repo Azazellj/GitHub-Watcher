@@ -1,44 +1,41 @@
 package com.azazellj.githubwatcher.ui.main;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.azazellj.githubwatcher.BaseApp;
 import com.azazellj.githubwatcher.R;
 import com.azazellj.githubwatcher.data.model.Repository;
 import com.azazellj.githubwatcher.databinding.ActivityMainBinding;
+import com.azazellj.githubwatcher.ui.base.OnItemClickListener;
+import com.azazellj.githubwatcher.ui.repository.detail.RepositoryDetailActivity;
+import com.azazellj.githubwatcher.util.Constants;
 import com.malinskiy.superrecyclerview.OnMoreListener;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.inject.Inject;
 
 public class MainActivity
         extends AppCompatActivity
-        implements MainMvpView, OnMoreListener {
+        implements MainMvpView, OnMoreListener,
+        OnItemClickListener {
 
     @Inject
     MainPresenter presenter;
     @Inject
     SearchAdapter searchAdapter;
 
-    private static final long DELAY = 500; // milliseconds
-    private Timer mTimer = new Timer();
-
     private ActivityMainBinding mView;
-    private SearchView mSearch;
 
-    private Integer pageNumber = MainPresenter.FIRST_PAGE;
+    private Integer pageNumber = Constants.FIRST_PAGE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +55,23 @@ public class MainActivity
         mView.searchRecyclerView.setupMoreListener(this, 1);
         mView.searchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mView.searchRecyclerView.setAdapter(searchAdapter);
+        searchAdapter.setOnRepoClickListener(this);
+
+        mView.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                searchAdapter.clear();
+                presenter.findRepo(query);
+                hideEmptyView();
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String searchQuery) {
+                return false;
+            }
+        });
 
         hideEmptyView();
     }
@@ -66,109 +80,25 @@ public class MainActivity
 
     }
 
-    private void scheduleSearch(final String searchQuery) {
-        mTimer.cancel();
-        mTimer = new Timer();
-        mTimer.schedule(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(() -> {
-                            searchAdapter.clear();
-                            presenter.findRepo(searchQuery);
-                            hideEmptyView();
-                        });
-                    }
-                },
-                DELAY
-        );
-    }
-
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search, menu);
+    public void onItemClick(int position) {
+        Repository repository = searchAdapter.getItem(position);
+        if (repository == null) {
+            return;
+        }
 
-        MenuItem menuItem = menu.findItem(R.id.search);
-//        MenuItemCompat.expandActionView(menuItem);
-
-        mSearch = (SearchView) menuItem.getActionView();
-        mSearch.setOnCloseListener(() -> {
-            resetState();
-            return false;
-        });
-        MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(final MenuItem item) {
-//                showFastSearch();
-                return false;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(final MenuItem item) {
-//                //clear items
-//                if (!isFastSearchVisible() && !searchAdapter.isEmpty()) {
-//                    searchAdapter.clear();
-//                    return false;
-//                }
-//                //clean search query
-//                if (!isFastSearchVisible() && !getSearchQuery().isEmpty()) {
-//                    mSearch.setQuery("", false);
-//                    return false;
-//                }
-//                //finish activity
-//                if (getSearchQuery().isEmpty()) {
-//                    finish();
-//                    return false;
-//                }
-//                finish();
-
-                return false;
-            }
-        });
-        mSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(final String query) {
-                searchAdapter.clear();
-                presenter.findRepo(query);
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(final String searchQuery) {
-                if ("".equals(searchQuery)) {
-                    resetState();
-                }
-
-                if (searchQuery.length() < MainPresenter.MIN_STR_SIZE) {
-                    resetState();
-                    return true;
-                }
-
-                searchAdapter.clear();
-
-                scheduleSearch(searchQuery);
-
-                return false;
-            }
-        });
-
-        return true;
+        Intent intent = new Intent(this, RepositoryDetailActivity.class);
+        intent.putExtra(Constants.ARGS_REPO, repository);
+        startActivity(intent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (mSearch != null) {
-            mSearch.clearFocus();
+        if (mView.search != null) {
+            mView.search.clearFocus();
         }
-    }
-
-    private void resetState() {
-        searchAdapter.clear();
-        pageNumber = MainPresenter.FIRST_PAGE;
     }
 
     @Override
@@ -190,25 +120,20 @@ public class MainActivity
     @Override
     public void onMoreAsked(final int numberOfItems, final int numberBeforeMore,
                             final int currentItemPos) {
-        if (currentItemPos == -1) {
+
+        boolean noPosition = currentItemPos == RecyclerView.NO_POSITION;
+        boolean emptyNextPage = pageNumber == null;
+        boolean emptyCurrentQuery = TextUtils.isEmpty(getSearchQuery());
+
+        if (noPosition || emptyNextPage || emptyCurrentQuery) {
             hideProgress();
-            return;
+        } else {
+            presenter.findRepo(getSearchQuery(), pageNumber);
         }
-
-        if (pageNumber == null) {
-            hideProgress();
-            return;
-        }
-
-        String query = getSearchQuery();
-        pageNumber++;
-
-        presenter.findRepo(query, pageNumber);
     }
 
-
     @Override
-    public void showRepositories(List<Repository> items, int totalCount, boolean endOfResults, boolean newLoad, Integer nextPage) {
+    public void showRepositories(List<Repository> items, boolean newLoad, Integer nextPage) {
         //no results
         if (items.isEmpty() && newLoad) {
             showEmptyView();
@@ -219,12 +144,10 @@ public class MainActivity
 
         this.pageNumber = nextPage;
         this.searchAdapter.addAll(items);
-
-
     }
 
     private String getSearchQuery() {
-        return mSearch.getQuery().toString();
+        return mView.search.getQuery().toString();
     }
 
     private void showEmptyView() {

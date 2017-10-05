@@ -2,11 +2,13 @@ package com.azazellj.githubwatcher.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by azazellj on 02.10.17.
  */
 
-public class Repository {
+public class Repository implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("name")
@@ -14,7 +16,7 @@ public class Repository {
     @SerializedName("full_name")
     private String fullName;
     @SerializedName("owner")
-    private Owner owner;
+    private User owner;
     @SerializedName("private")
     private boolean _private;
     @SerializedName("html_url")
@@ -156,6 +158,10 @@ public class Repository {
         return forksCount;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
     public String getLanguage() {
         return language;
     }
@@ -164,12 +170,16 @@ public class Repository {
         return name;
     }
 
-    public Owner getOwner() {
+    public User getOwner() {
         return owner;
     }
 
     public int getStargazersCount() {
         return stargazersCount;
+    }
+
+    public String getSubscribersUrl() {
+        return subscribersUrl;
     }
 
     public String getUpdatedAt() {
