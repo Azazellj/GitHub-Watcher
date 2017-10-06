@@ -154,35 +154,47 @@ public class Repository implements Serializable {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getForksCount() {
         return forksCount;
+    }
+
+    public void setForksCount(int forksCount) {
+        this.forksCount = forksCount;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public String getLanguage() {
-        return language;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public User getOwner() {
         return owner;
     }
 
-    public int getStargazersCount() {
-        return stargazersCount;
-    }
-
-    public String getSubscribersUrl() {
-        return subscribersUrl;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

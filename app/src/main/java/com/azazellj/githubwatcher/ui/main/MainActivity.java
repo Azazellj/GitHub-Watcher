@@ -157,4 +157,8 @@ public class MainActivity
     private void hideEmptyView() {
         mView.searchRecyclerView.getEmptyView().setVisibility(View.GONE);
     }
+
+    public ActivityMainBinding getView() {
+        return mView;
+    }
 }

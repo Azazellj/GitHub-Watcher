@@ -57,7 +57,6 @@ public class MainPresenter
     private void showRepositories(RepositoryResponse response,
                                   boolean newLoad, int page) {
         List<Repository> items = response.getItems();
-        int totalCount = response.getTotalCount();
         boolean endOfResults = items.isEmpty() && page != Constants.FIRST_PAGE;
         Integer nextPage = endOfResults ? null : ++page;
 
@@ -76,6 +75,6 @@ public class MainPresenter
 
     @Override
     public void showProgressOnScreen() {
-        getMvpView().hideProgress();
+        getMvpView().showProgress();
     }
 }

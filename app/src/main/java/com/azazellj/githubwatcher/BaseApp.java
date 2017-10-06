@@ -13,10 +13,13 @@ import com.azazellj.githubwatcher.injection.module.AppModule;
 public class BaseApp
         extends Application {
 
+    private static BaseApp sInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
+        sInstance = this;
         appComponent = buildAppComponent();
     }
 
@@ -35,4 +38,8 @@ public class BaseApp
                 .appModule(new AppModule())
                 .build();
     }
+
+//    public static BaseApp getInstance() {
+//        return sInstance;
+//    }
 }

@@ -29,4 +29,8 @@ public class RepositoryResponse {
     public List<Repository> getItems() {
         return items;
     }
+
+    public void setItems(List<Repository> items) {
+        this.items = items;
+    }
 }
