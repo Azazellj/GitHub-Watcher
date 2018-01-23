@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 repositories {
     mavenCentral()
@@ -8,7 +7,7 @@ repositories {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.azazellj.githubwatcher"
         targetSdkVersion 25
@@ -28,11 +27,15 @@ android {
         enabled true
     }
 
+    flavorDimensions("api")
+
     productFlavors {
         production {
+            dimension "api"
             minSdkVersion 15
         }
         development {
+            dimension "api"
             applicationIdSuffix ".debug"
             minSdkVersion 18
         }
@@ -123,7 +126,4 @@ dependencies {
 
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     androidTestCompile 'com.azimolabs.conditionwatcher:conditionwatcher:0.1'
-
-
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
 }
